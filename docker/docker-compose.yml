@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  node1:
+    build: ./
+    container_name: hermesledger_node1
+    volumes:
+      - ./src:/app
+    networks:
+      - hermesledger-net
+  node2:
+    build: ./
+    container_name: hermesledger_node2
+    volumes:
+      - ./src:/app
+    networks:
+      - hermesledger-net
+  node3:
+    build: ./
+    container_name: hermesledger_node3
+    volumes:
+      - ./src:/app
+    networks:
+      - hermesledger-net
+networks:
+  hermesledger-net:
+    driver: bridge
