@@ -1,0 +1,35 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main  # Déclenche sur les push vers la branche `main`
+  pull_request:
+    branches:
+      - main  # Déclenche aussi sur les pull requests vers `main`
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Utilise un environnement Ubuntu pour exécuter le workflow
+
+    steps:
+      # Étape 1 : Checkout du code depuis GitHub
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Étape 2 : Installer Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Choisir la version de Python que tu utilises
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Installe les dépendances spécifiées dans requirements.txt
+
+      # Étape 4 : Exécuter les tests
+      - name: Run tests
+        run: |
+          python -m unittest discover src  # Cherche les tests dans le répertoire `src`
